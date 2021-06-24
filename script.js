@@ -9,17 +9,17 @@ Task to-do
 
 const taskContainer = document.querySelector('.task__container');
 
-const globalStore = [];
+let globalStore = [];
 
 const generateNewCard = (taskData) => `
-<div class="col-lg-4 col-md-6 col-sm-12" id=${taskData.id}>
+<div class="col-lg-4 col-md-6 col-sm-12" >
     <div class="card">
         <div class="card-header d-flex justify-content-end gap-2">
             <button type="button" class="btn btn-outline-success">
                 <i class="fas fa-pencil-alt"></i>
             </button>
-            <button type="button" class="btn btn-outline-danger">
-                <i class="fas fa-trash-alt"></i>
+            <button type="button" class="btn btn-outline-danger" id=${taskData.id} onclick="deleteCard.apply(this, arguments)">
+                <i class="fas fa-trash-alt" id=${taskData.id} onclick="deleteCard.apply(this, arguments)"></i>
             </button>
         </div>
         <img src=${taskData.imageUrl} class="card-img-top p-2 rounded-3" alt="..." />
@@ -71,3 +71,27 @@ const saveChanges = () => {
 
 
 };
+
+const deleteCard = (event) => {
+
+    // to get id
+    event = window.event;
+    const targetID = event.target.id;
+    const tagname = event.target.tagName; // BUTTON or ICON
+
+    // Remove the element whose id matches with the event id 
+    globalStore = globalStore.filter((cardObject) => cardObject.id !== targetID);
+    // globalStore is an updated array 
+
+    // setting the local stroage
+    localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
+
+
+
+    if (tagname === "BUTTON") {
+        return taskContainer.removeChild(event.target.parentNode.parentNode.parentNode);
+    } else {
+        return taskContainer.removeChild(event.target.parentNode.parentNode.parentNode.parentNode);
+    }
+
+}
