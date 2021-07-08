@@ -1,10 +1,45 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #ebf2ff;
     font-family: 'Roboto', sans-serif;
 }
 
 .nav__style {
-    height: 10vh;
-    padding: 0 5vw;
+    height: 8vh;
+    padding: 0 4vw;
+}
+
+
+/* .btn__style__buyItem {
+    background: linear-gradient()
+} */
+
+.btn__style {
+    background-image: linear-gradient( to right, #314755 0%, #26a0da 51%, #314755 100%);
+}
+
+.btn__base {
+    width: 8vw;
+    height: 5vh;
+    margin: 10px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+    border: none;
+}
+
+.btn__base:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn__open {
+    background-image: linear-gradient(to right, #C04848 0%, #480048 51%, #C04848 100%)
 }

@@ -27,6 +27,7 @@
 
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar nav__style navbar-expand-md navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <a class="navbar-brand text-primary fw-bold" href="#">UrTask</a>
@@ -39,11 +40,60 @@
                         <a class="nav-link fw-bold active" aria-current="page" href="#">Home</a>
                     </li>
                 </ul>
-                <button class="btn btn-primary rounded-3" type="button"><i class="fas fa-plus"></i> Add new</button>
+                <button class="btn btn-primary rounded-3 btn__style btn__base" type="button"><i class="fas fa-plus"></i>
+                    Add
+                    new</button>
             </div>
         </div>
     </nav>
 
+    <!-- Main Body -->
+    <div class="container">
+
+        <!-- Search bar -->
+        <section>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6">
+                    <div class="input-group mb-3 shadow-lg">
+                        <input type="text" class="form-control" placeholder="Search Task" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards -->
+        <section class="mt-3">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card ">
+                        <div class="card-header d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-outline-success w-auto">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger w-auto ">
+                                <i class="fas fa-trash-alt "></i>
+                            </button>
+                        </div>
+                        <img src="https://images.pexels.com/photos/303383/pexels-photo-303383.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Task Image" class="card-img-top rounded-3 p-2">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Task Title</h5>
+                            <p class="card-text">Task Description
+                            </p>
+                            <a href="#" class="btn btn-primary btn__style btn__base">Buy Item</a>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button " class="btn btn-outline-dark float-end btn__base btn__open">
+                                Open Task
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
 
     <!-- Bootstrap Js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
