@@ -27,8 +27,28 @@
 
 <body>
 
+    <!-- Modal -->
+    <div class="modal fade" id="addNewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Navbar -->
-    <nav class="navbar nav__style navbar-expand-md navbar-light bg-light border-bottom">
+    <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom nav__style ">
         <div class="container-fluid">
             <a class="navbar-brand text-primary fw-bold" href="#">UrTask</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,9 +60,7 @@
                         <a class="nav-link fw-bold active" aria-current="page" href="#">Home</a>
                     </li>
                 </ul>
-                <button class="btn btn-primary rounded-3 btn__style btn__base" type="button"><i class="fas fa-plus"></i>
-                    Add
-                    new</button>
+                <button type="button" class="btn btn-primary rounded-3 btn__style btn__base" data-bs-toggle="modal" data-bs-target="#addNewModal"><i class="fas fa-plus"></i> Add new</button>
             </div>
         </div>
     </nav>
