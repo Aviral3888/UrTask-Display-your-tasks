@@ -1,7 +1,4 @@
 /*
-Task::
-1. On save changes card should be displayed 
-
 Task to-do
 1. Features
 2. Data should be stored even after refresh : Local Storage (Done)
@@ -10,31 +7,61 @@ Task to-do
 5. Open the card
 */
 
-const taskContainer = document.querySelector('.task__container');
+// For local Storage
+const state = {
+    taskList: [],
+}
 
-let globalStore = [];
+const taskContents = document.querySelector(".task__contents");
+const taskModal = document.querySelector(".task__modal__body");
 
-const generateNewCard = (taskData) =>
+const htmlTaskContent = ({
+        id,
+        title,
+        description,
+        type,
+        url
+    }) =>
     `
-<div class="col-lg-4 col-md-6 col-sm-12">
-    <div class="card ">
-        <div class="card-header d-flex justify-content-end gap-2">
-            <button type="button" id=${taskData.id} class="btn btn-outline-success w-auto">
+<div class="col-lg-4 col-md-6 col-sm-12" id= ${id} key = ${id}>
+    <div class="card shadow-sm task__card">
+        <div class="card-header d-flex justify-content-end gap-2 task__card__header">
+            <button 
+                type="button" 
+                id=${id} 
+                class="btn btn-outline-success w-auto"
+                onclick = "editTask.apply(this, arguments)"
+            >
                 <i class="fas fa-pencil-alt"></i>
             </button>
-            <button type="button" class="btn btn-outline-danger w-auto ">
+            <button 
+                type="button" 
+                id=${id}
+                class="btn btn-outline-danger w-auto" 
+                onclick = "deleteTask.apply(this, arguments)"
+            >
                 <i class="fas fa-trash-alt "></i>
             </button>
         </div>
-        <img src=${taskData.imageUrl} alt="Task Image" class="card-img-top rounded-3 p-2" />
 
         <div class="card-body">
-            <h5 class="card-title">${taskData.taskTitle}</h5>
-            <p class="card-text">${taskData.taskDescription}</p>
-            <a href="#" class="btn btn-primary btn__style btn__base">${taskData.taskType}</a>
+            <img src=${url} alt="Task Image" class="card-img-top rounded-3 p-2" />
+
+            <h5 class="task__card__title">${title}</h5>
+            <p class="description">${description}</p>
+            <div class="tags text-white d-flex flex-wrap">
+                <span class="badge bg-primary m-1">${type}</span>
+            </div>
         </div>
         <div class="card-footer">
-            <button type="button " class="btn btn-outline-dark float-end btn__base btn__open">
+            <button 
+                type="button" 
+                class="btn btn-outline-dark float-end btn__base btn__open"
+                data-bs-toggle="modal"
+                data-bs-target="#showTask"
+                onclick = "openTask.apply(this, arguments)"
+                id=${id}
+            >
                 Open Task
             </button>
         </div>
@@ -43,19 +70,19 @@ const generateNewCard = (taskData) =>
 
 `
 
-const handleSubmit = () => {
-    const taskData = {
-        id: `${Date.now()}`, // unique number for any id
-        imageUrl: document.getElementById("imageurl").value,
-        taskTitle: document.getElementById("tasktitle").value,
-        taskType: document.getElementById("tasktype").value,
-        taskDescription: document.getElementById("taskdescription").value,
+const handleSubmit = (e) => {
+    const id = `${Date.now()}`; // unique number for any id
+    const input = {
+        url: document.getElementById("imageUrl").value,
+        title: document.getElementById("taskTitle").value,
+        description: document.getElementById("taskDescription").value,
+        type: document.getElementById("Tags").value,
     };
 
-    taskContainer.insertAdjacentHTML(
+    taskContents.insertAdjacentHTML(
         "beforeend",
-        generateNewCard(taskData)
+        htmlTaskContent({...input, id })
     );
-
-    globalStore.push(taskData);
+    state.taskList.push({...input, id });
+    updateLocalStorage();
 }

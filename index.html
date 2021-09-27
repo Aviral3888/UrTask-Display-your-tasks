@@ -25,7 +25,7 @@
 
 </head>
 
-<body>
+<body onload="loadInitialData()">
 
     <!-- Modal -->
     <div class="modal fade" id="addNewModal" tabindex="-1" aria-labelledby="addNewModalLabel" aria-hidden="true">
@@ -34,7 +34,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="addNewModalLabel">Add New Task</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
+                        <!-- <i class="fas fa-times"></i> -->
                     </button>
                 </div>
                 <div class="modal-body">
@@ -48,8 +48,8 @@
                             <input type="text" class="form-control" id="taskTitle" aria-describedby="Task Title" placeholder="Eg: Learn Web Development" />
                         </div>
                         <div class="mb-3">
-                            <label for="taskType" class="form-label">Task Type</label>
-                            <input type="text" class="form-control" id="taskType" aria-describedby="Task Type" placeholder="Eg: Work.." />
+                            <label for="Tags" class="form-label">Task Type</label>
+                            <input type="text" class="form-control" id="Tags" aria-describedby="Task Type" placeholder="Eg: Work.." />
                         </div>
                         <div class="mb-3">
                             <label for="taskDescription" class="form-label">Task Description</label>

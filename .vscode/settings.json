@@ -1,5 +1,4 @@
 {
-    "cSpell.ignoreWords": [
-        "bootswatch"
-    ]
+  "cSpell.ignoreWords": ["bootswatch"],
+  "liveServer.settings.port": 5501
 }
