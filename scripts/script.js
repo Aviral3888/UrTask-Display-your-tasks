@@ -10,7 +10,6 @@ Task to-do
 5. Open the card
 */
 
-
 const taskContainer = document.querySelector('.task__container');
 
 let globalStore = [];
@@ -43,9 +42,6 @@ const generateNewCard = (taskData) =>
 </div>
 
 `
-
-
-
 
 const handleSubmit = () => {
     const taskData = {
