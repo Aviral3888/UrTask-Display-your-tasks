@@ -1,10 +1,12 @@
 /*
 Task to-do
-1. Features
-2. Data should be stored even after refresh : Local Storage (Done)
-3. Delete the card (Done)
-4. Edit the card
-5. Open the card
+    
+Features:
+
+1. Data should be stored even after refresh : Local Storage (Done)
+2. Delete the card 
+3. Edit the card
+4. Open the card
 */
 
 // For local Storage
@@ -86,3 +88,24 @@ const handleSubmit = (e) => {
     state.taskList.push({...input, id });
     updateLocalStorage();
 }
+
+const updateLocalStorage = () => {
+
+    localStorage.setItem("tasky", JSON.stringify({
+        tasks: state.taskList
+    }));
+
+}
+
+const loadInitialData = () => {
+
+    const localStorageCopy = JSON.parse(localStorage.tasky);
+
+    if (localStorageCopy)
+        state.taskList = localStorageCopy.tasks;
+
+    state.taskList.map((cardData) => {
+        taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData));
+    });
+
+};
