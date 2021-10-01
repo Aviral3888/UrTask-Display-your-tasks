@@ -89,6 +89,8 @@ const handleSubmit = (e) => {
     updateLocalStorage();
 }
 
+// LocalStorage Features 
+
 const updateLocalStorage = () => {
 
     localStorage.setItem("tasky", JSON.stringify({
@@ -109,3 +111,20 @@ const loadInitialData = () => {
     });
 
 };
+
+// Delete Card Feature
+
+const deleteTask = () => {
+    if (!e)
+        e = window.event;
+
+    const targetID = e.target.id;
+    const number = getElementById("task").innerHTML = {
+        state.taskList.map((e) => {
+            e.targetID = {
+                targetID:
+            }
+        })
+    }
+
+}
