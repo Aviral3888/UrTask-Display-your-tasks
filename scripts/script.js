@@ -4,8 +4,8 @@ Task to-do
 Features:
 
 1. Data should be stored even after refresh : Local Storage (Done)
-2. Delete the card 
-3. Edit the card
+2. Delete the card (Done)
+3. Edit the card (Done)
 4. Open the card
 */
 
@@ -136,3 +136,81 @@ const deleteTask = (e) => {
     );
 
 };
+
+// Edit Task 
+
+const editTask = (e) => {
+    if (!e) e = window.event;
+    const targetID = e.target.id;
+    const type = e.target.tagName;
+
+    let parentNode;
+    let taskTitle;
+    let taskDescription;
+    let taskType;
+    let submitButton;
+
+    if (type === "BUTTON") {
+        parentNode = e.target.parentNode.parentNode;
+    } else {
+        parentNode = e.target.parentNode.parentNode.parentNode;
+    }
+
+    taskTitle = parentNode.childNodes[3].childNodes[3];
+    taskDescription = parentNode.childNodes[3].childNodes[5];
+    taskType = parentNode.childNodes[3].childNodes[7].childNodes[1];
+    submitButton = parentNode.childNodes[5].childNodes[1];
+
+    taskTitle.setAttribute("contenteditable", "true");
+    taskDescription.setAttribute("contenteditable", "true");
+    taskType.setAttribute("contenteditable", "true");
+    submitButton.setAttribute("onclick", "saveEdit.apply(this, arguments)");
+
+    submitButton.removeAttribute("data-bs-toggle");
+    submitButton.removeAttribute("data-bs-target");
+    submitButton.innerHTML = "Save Changes";
+
+}
+
+const saveEdit = (e) => {
+    if (!e) e = window.event;
+    const targetID = e.target.id;
+    const parentNode = e.target.parentNode.parentNode;
+    // console.log(parentNode.childNodes);
+
+    const taskTitle = parentNode.childNodes[3].childNodes[3];
+    const taskDescription = parentNode.childNodes[3].childNodes[5];
+    const submitButton = parentNode.childNodes[5].childNodes[1];
+    const taskType = parentNode.childNodes[3].childNodes[7].childNodes[1];
+
+    const updateData = {
+        taskTitle: taskTitle.innerHTML,
+        taskDescription: taskDescription.innerHTML,
+        taskType: taskType.innerHTML,
+    }
+
+    let stateCopy = state.taskList;
+
+    stateCopy = stateCopy.map((task) =>
+        task.id === targetID ? {
+            id: task.id,
+            title: updateData.taskTitle,
+            description: updateData.taskDescription,
+            type: updateData.taskType,
+            url: task.url,
+        } :
+        task
+    );
+
+    state.taskList = stateCopy;
+
+    updateLocalStorage();
+
+    taskTitle.setAttribute("contenteditable", "false");
+    taskDescription.setAttribute("contenteditable", "false");
+    taskType.setAttribute("contenteditable", "false");
+    submitButton.setAttribute("onclick", "openTask.apply(this, arguments)");
+    submitButton.setAttribute("data-bs-toggle", "modal");
+    submitButton.setAttribute("data-bs-target", "#showTask");
+    submitButton.innerHTML = "Open Task";
+}
