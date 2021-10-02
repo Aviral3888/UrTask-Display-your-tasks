@@ -114,17 +114,25 @@ const loadInitialData = () => {
 
 // Delete Card Feature
 
-const deleteTask = () => {
-    if (!e)
-        e = window.event;
+const deleteTask = (e) => {
+    if (!e) e = window.event;
 
     const targetID = e.target.id;
-    const number = getElementById("task").innerHTML = {
-        state.taskList.map((e) => {
-            e.targetID = {
-                targetID:
-            }
-        })
-    }
+    const type = e.target.tagName;
+    const removeTask = state.taskList.filter(({ id }) =>
+        id !== targetID
+    );
+    state.taskList = removeTask;
 
-}
+    updateLocalStorage();
+
+    if (type === "BUTTON") {
+        return e.target.parentNode.parentNode.parentNode.parentNode.removeChild(
+            e.target.parentNode.parentNode.parentNode
+        )
+    }
+    return e.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(
+        e.target.parentNode.parentNode.parentNode.parentNode
+    );
+
+};
