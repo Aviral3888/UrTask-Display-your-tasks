@@ -7,6 +7,7 @@ Features:
 2. Delete the card (Done)
 3. Edit the card (Done)
 4. Open the card
+5. Search the Card
 */
 
 // For local Storage
@@ -72,6 +73,37 @@ const htmlTaskContent = ({
 
 `
 
+// Modal Box
+
+const htmlModalContent = ({ id, title, description, url }) => {
+
+        const date = new Date(parseInt(id));
+
+        return `
+            <div id=${id}>
+            <img 
+                src = ${url || `https://images.unsplash.com/photo-1572214350916-571eac7bfced?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=755&q=80`}"
+                alt = "Card Image"
+                class = "img-fluid place__holder__image mb-3"
+            />
+            <strong class="text-sm text-muted">Created on ${date.toDateString()}</strong>
+            <h2 class="my-3">${title}</h2>
+            <p class="lead">${description} </p>
+            </div>
+    `;
+}
+
+// Open Modal Box
+
+const openTask = (e) => {
+
+    if (!e) e = window.event;
+
+    const getTask = state.taskList.filter(({ id }) => id === e.target.id);
+    taskModal.innerHTML = htmlModalContent(getTask[0]);
+
+}
+
 const handleSubmit = (e) => {
     const id = `${Date.now()}`; // unique number for any id
     const input = {
@@ -83,9 +115,9 @@ const handleSubmit = (e) => {
 
     taskContents.insertAdjacentHTML(
         "beforeend",
-        htmlTaskContent({...input, id })
+        htmlTaskContent({ ...input, id })
     );
-    state.taskList.push({...input, id });
+    state.taskList.push({ ...input, id });
     updateLocalStorage();
 }
 
@@ -199,7 +231,7 @@ const saveEdit = (e) => {
             type: updateData.taskType,
             url: task.url,
         } :
-        task
+            task
     );
 
     state.taskList = stateCopy;
